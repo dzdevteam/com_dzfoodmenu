@@ -2,202 +2,222 @@
 <form>
 	<fieldset>
 
-              <field name="id" type="text" default="0" label="COM_DZFOODMENU_FORM_LBL_DISH_ID"
+        <field name="id" type="text" default="0" label="COM_DZFOODMENU_FORM_LBL_DISH_ID"
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
-       <field name="created" type="timecreated" default="" 
+        <field name="created" type="timecreated" default="" 
             label="COM_DZFOODMENU_FORM_LBL_DISH_CREATED"
             description="COM_DZFOODMENU_FORM_DESC_DISH_CREATED"  /> 
 
-       <field name="created_by" type="createdby" default="" 
+        <field name="created_by" type="createdby" default="" 
             label="COM_DZFOODMENU_FORM_LBL_DISH_CREATED_BY"
             description="COM_DZFOODMENU_FORM_DESC_DISH_CREATED_BY"  /> 
 
-       <field name="title" type="text"
-                
+        <field name="title" type="text"
             label="COM_DZFOODMENU_FORM_LBL_DISH_TITLE"
             description="COM_DZFOODMENU_FORM_DESC_DISH_TITLE" 
-                
-                
-                 required="true" 
-            filter="raw" /> 
-
-       <field name="alias" type="text"
-                
-            label="COM_DZFOODMENU_FORM_LBL_DISH_ALIAS"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_ALIAS" 
-                
-                
-                
+            required="true" 
             filter="string" /> 
 
-       <field name="catid" type="category"
-                
+        <field name="alias" type="text"
+            label="COM_DZFOODMENU_FORM_LBL_DISH_ALIAS"
+            description="COM_DZFOODMENU_FORM_DESC_DISH_ALIAS" 
+            filter="string" /> 
+
+        <field name="catid" type="category"
             label="COM_DZFOODMENU_FORM_LBL_DISH_CATID"
             description="COM_DZFOODMENU_FORM_DESC_DISH_CATID" 
-                
-                
-                
-            extension="com_dzfoodmenu.dishes.catid"
-            filter="raw" /> 
+            extension="com_dzfoodmenu.dishes.catid">
+            <option value="">JOPTION_SELECT_CATEGORY</option>
+        </field>
 
  
-		<field name="filter_catid" type="category"
+        <field name="filter_catid" type="category"
             label="COM_DZFOODMENU_FORM_LBL_DISH_CATID"
             description="COM_DZFOODMENU_FORM_DESC_DISH_CATID"  extension="com_dzfoodmenu.dishes.catid" show_root="1" onchange="this.form.submit();" /> 
 
-       <field name="description" type="editor"
-                
+        <field name="description" type="editor"
             label="COM_DZFOODMENU_FORM_LBL_DISH_DESCRIPTION"
             description="COM_DZFOODMENU_FORM_DESC_DISH_DESCRIPTION" 
-                
-                
-                
-            filter="raw" /> 
+            filter="safehtml" /> 
 
-       <field name="note" type="textarea"
-                
+        <field name="note" type="textarea"
             label="COM_DZFOODMENU_FORM_LBL_DISH_NOTE"
             description="COM_DZFOODMENU_FORM_DESC_DISH_NOTE" 
-                
-                
-                
-            cols="100"
-            rows="8"
-            filter="raw" /> 
+            class="span12" rows="10"
+            filter="string" /> 
 
-       <field name="prices" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES"  /> 
+        <fields name="prices">
+            <fieldset name="prices" label="COM_DZFOODMENU_FORM_FIELDSET_DISHES_PRICES">
+                <field
+                    name="medium"
+                    type="text"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES_MEDIUM" 
+                    class="validate-numeric"/>
+                <field
+                    name="large"
+                    type="text"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES_LARGE" 
+                    class="validate-numeric"/>
+                <field
+                    name="special"
+                    type="text"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES_SPECIAL" 
+                    class="validate-numeric"/>
+            </fieldset>
+        </fields>
 
-       <field name="saleoff" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_DISH_SALEOFF"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_SALEOFF"  /> 
+        <fields name="saleoff">
+            <fieldset name="saleoff" label="COM_DZFOODMENU_FORM_FIELDSET_DISHES_SALEOFF">
+                <field
+                    name="medium"
+                    type="text"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES_MEDIUM" 
+                    class="validate-numeric"/>
+                <field
+                    name="large"
+                    type="text"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES_LARGE" 
+                    class="validate-numeric"/>
+                <field
+                    name="special"
+                    type="text"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_PRICES_SPECIAL" 
+                    class="validate-numeric"/>
+            </fieldset>
+        </fields>
 
-       <field name="images" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_DISH_IMAGES"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_IMAGES"  /> 
+        <fields name="images">
+            <fieldset name="images">
+                <field
+                    name="thumbnail"
+                    type="media"
+                    directory="/"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_IMAGES_THUMBNAIL"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_IMAGES_THUMBNAIL" />
+                <field
+                    name="full"
+                    type="media"
+                    directory="/"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_IMAGES_FULL"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_IMAGES_FULL" />
+            </fieldset>
+        </fields>
 
-       <field name="featured" type="list"
-                
+        <field name="featured" type="list" class="span12 small"
+            default="0"
             label="COM_DZFOODMENU_FORM_LBL_DISH_FEATURED"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_FEATURED" 
-                
-                
-                
-            filter="raw">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
+            description="COM_DZFOODMENU_FORM_DESC_DISH_FEATURED">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
         </field> 
 
  
 		<field name="filter_featured" type="list" onchange="this.form.submit();">
 			<option value="">COM_DZFOODMENU_DISHES_FEATURED_FILTER</option>
-			<option value="0">No</option>
-			<option value="1">Yes</option>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
 		</field> 
 
-       <field name="alternative" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_DISH_ALTERNATIVE"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_ALTERNATIVE"  /> 
+        <fields name="alternative">
+            <fieldset name="alternative">
+                <field
+                    name="title"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_ALT_TITLE"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_ALT_TITLE"
+                    type="text" />
+                <field
+                    name="description"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_ALT_DESCRIPTION"
+                    description="COM_DZFOODMENU_FORM_DISH_GROUP_ALT_DESCRIPTION"
+                    type="editor" />
+                <field
+                    name="note"
+                    label="COM_DZFOODMENU_FORM_LBL_DISH_ALT_NOTE"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_ALT_NOTE"
+                    type="textarea"
+                    class="span6" rows="10" />
+            </fieldset>
+        </fields>
 
-       <field name="params" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_DISH_PARAMS"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_PARAMS"  /> 
+        <fields name="params"> 
+        </fields>
 
-       <field name="metakey" type="textarea"
-                
+        <field name="metakey" type="textarea"
             label="COM_DZFOODMENU_FORM_LBL_DISH_METAKEY"
             description="COM_DZFOODMENU_FORM_DESC_DISH_METAKEY" 
-                
-                
-                
             cols="100"
             rows="8"
             filter="string" /> 
 
-       <field name="metadesc" type="textarea"
-                
+        <field name="metadesc" type="textarea"
             label="COM_DZFOODMENU_FORM_LBL_DISH_METADESC"
             description="COM_DZFOODMENU_FORM_DESC_DISH_METADESC" 
-                
-                
-                
             cols="100"
             rows="8"
             filter="string" /> 
+        
+        <field name="tags" type="tag" mode="ajax" custom="allow"
+            label="JTAG" description="JTAG_DESC"
+            class="inputbox small" multiple="true" />
+            
+        <fields name="metadata">
+            <fieldset name="jmetadata"
+                label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+                
+                <field name="robots"
+                    type="list"
+                    label="JFIELD_METADATA_ROBOTS_LABEL"
+                    description="JFIELD_METADATA_ROBOTS_DESC"
+                    labelclass="control-label">
+                    <option value="">JGLOBAL_USE_GLOBAL</option>
+                    <option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+                    <option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+                    <option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+                    <option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+                </field>                            
+            </fieldset>
+        </fields>
 
-       <field name="metadata" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_DISH_METADATA"
-            description="COM_DZFOODMENU_FORM_DESC_DISH_METADATA"  /> 
+        <field
+            name="state"
+            type="list"
+            label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC"
+            class="inputbox"
+            size="1"
+            default="1">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+            <option value="2">JARCHIVED</option>
+            <option value="-2">JTRASHED</option>
+        </field> 
 
-         <field
-        name="state"
-        type="list"
-        label="JSTATUS"
-        description="JFIELD_PUBLISHED_DESC"
-        class="inputbox"
-        size="1"
-        default="1">
-        <option value="1">JPUBLISHED</option>
-        <option value="0">JUNPUBLISHED</option>
-    </field> 
-
-                        <field name="checked_out" type="hidden" filter="unset" />
+        <field name="checked_out" type="hidden" filter="unset" />
         <field name="checked_out_time" type="hidden" filter="unset" /> 
 
- </fieldset> 
+    </fieldset> 
 
- <fieldset 
-                        name="accesscontrol">
-                       <field name="asset_id" type="hidden" filter="unset" />
-                       <field name="rules"
-                            type="rules"
-                            label="JFIELD_RULES_LABEL"
-                            translate_label="false"
-                            filter="rules"
-                            validate="rules"
-                            class="inputbox"
-                            component="com_dzfoodmenu"
-                            section="dish"
-                        />
+    <fieldset 
+        name="accesscontrol">
+        <field name="asset_id" type="hidden" filter="unset" />
+        <field name="rules"
+            type="rules"
+            label="JFIELD_RULES_LABEL"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_dzfoodmenu"
+            section="dish"
+        />
 
 	</fieldset>
 

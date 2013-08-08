@@ -18,6 +18,7 @@ JHtml::_('formbehavior.chosen', 'select');
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_dzfoodmenu/assets/css/dzfoodmenu.css');
+$document->addScript('//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js');
 
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
@@ -105,25 +106,25 @@ if (!empty($this->extra_sidebar)) {
 						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
 					</th>
                 <?php if (isset($this->items[0]->state)): ?>
-					<th width="1%" class="nowrap center">
+					<th width="2%" class="nowrap center">
 						<?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
 					</th>
                 <?php endif; ?>
-                    
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_DISHES_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
-				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_DISHES_TITLE', 'a.title', $listDirn, $listOrder); ?>
+				</th>
+				<th>
+				<?php echo JText::_('COM_DZFOODMENU_DISHES_THUMBNAIL'); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_DISHES_CATID', 'a.catid', $listDirn, $listOrder); ?>
 				</th>
-				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_DISHES_FEATURED', 'a.featured', $listDirn, $listOrder); ?>
-				</th>
-                    
-                    
+                <th class="left">
+                <?php echo JText::_('COM_DZFOODMENU_FORM_FIELDSET_DISH_PRICES'); ?>
+                </th>
+                <th class="left">
+                <?php echo JText::_('COM_DZFOODMENU_FORM_FIELDSET_DISH_SALEOFF'); ?>
+                </th>    
                 <?php if (isset($this->items[0]->id)): ?>
 					<th width="1%" class="nowrap center hidden-phone">
 						<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -181,14 +182,13 @@ if (!empty($this->extra_sidebar)) {
 					</td>
                 <?php if (isset($this->items[0]->state)): ?>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->state, $i, 'dishes.', $canChange, 'cb'); ?>
+                        <div class="btn-group">
+                            <?php echo JHtml::_('jgrid.published', $item->state, $i, 'dishes.', $canChange, 'cb'); ?>
+                            <?php echo JHtml::_('dzfoodmenuadministrator.featured', $item->featured, $i, $canChange); ?>
+						</div>
 					</td>
                 <?php endif; ?>
                     
-				<td>
-
-					<?php echo $item->created_by; ?>
-				</td>
 				<td>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'dishes.', $canCheckin); ?>
@@ -201,14 +201,25 @@ if (!empty($this->extra_sidebar)) {
 				<?php endif; ?>
 				</td>
 				<td>
-
-					<?php echo $item->catid; ?>
+                    <?php if (!empty($item->images['thumbnail'])) { ?>
+                    <img src="<?php echo JUri::root().$item->images['thumbnail']; ?>" />
+                    <?php } else { ?>
+                    <img src="holder.js/150x100" />
+                    <?php } ?>
 				</td>
 				<td>
-
-					<?php echo $item->featured; ?>
+					<?php echo $item->catid; ?>
 				</td>
-
+                <td>
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>: <?php echo $item->prices['medium']; ?><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <?php echo $item->prices['large']; ?><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <?php echo $item->prices['special']; ?>
+                </td>
+                <td>
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>: <?php echo $item->saleoff['medium']; ?><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <?php echo $item->saleoff['large']; ?><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <?php echo $item->saleoff['special']; ?>
+                </td>
 
                 <?php if (isset($this->items[0]->id)): ?>
 					<td class="center hidden-phone">

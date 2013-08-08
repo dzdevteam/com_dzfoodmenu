@@ -22,6 +22,9 @@ class DzfoodmenuTabledish extends JTable {
      */
     public function __construct(&$db) {
         parent::__construct('#__dzfoodmenu_dishes', 'id', $db);
+        
+        JTableObserverTags::createObserver($this, array('typeAlias' => 'com_dzfoodmenu.dish'));
+        JObserverMapper::addObserverClassToClass('JTableObserverTags', 'DZFoodMenuTableDish', array('typeAlias' => 'com_dzfoodmenu.dish'));
     }
 
     /**
@@ -52,6 +55,31 @@ class DzfoodmenuTabledish extends JTable {
             $registry->loadArray($array['metadata']);
             $array['metadata'] = (string) $registry;
         }
+        
+        if (isset($array['prices']) && is_array($array['prices'])) {
+            $registry = new JRegistry();
+            $registry->loadArray($array['prices']);
+            $array['prices'] = (string) $registry;
+        }
+        
+        if (isset($array['saleoff']) && is_array($array['saleoff'])) {
+            $registry = new JRegistry();
+            $registry->loadArray($array['saleoff']);
+            $array['saleoff'] = (string) $registry;
+        }
+        
+        if (isset($array['images']) && is_array($array['images'])) {
+            $registry = new JRegistry();
+            $registry->loadArray($array['images']);
+            $array['images'] = (string) $registry;
+        }
+        
+        if (isset($array['alternative']) && is_array($array['alternative'])) {
+            $registry = new JRegistry();
+            $registry->loadArray($array['alternative']);
+            $array['alternative'] = (string) $registry;
+        }
+        
         if(!JFactory::getUser()->authorise('core.admin', 'com_dzfoodmenu.dish.'.$array['id'])){
             $actions = JFactory::getACL()->getActions('com_dzfoodmenu','dish');
             $default_actions = JFactory::getACL()->getAssetRules('com_dzfoodmenu.dish.'.$array['id'])->getData();
@@ -95,6 +123,33 @@ class DzfoodmenuTabledish extends JTable {
             $this->ordering = self::getNextOrder();
         }
 
+        // Check for unique alias
+        // Checking valid title and alias
+        if (trim($this->title) == '')
+        {
+            $this->setError(JText::_('COM_DZFOODMENU_WARNING_PROVIDE_VALID_NAME'));
+            return false;
+        }
+
+        if (trim($this->alias) == '')
+        {
+            $this->alias = $this->title;
+        }
+
+        $this->alias = $this->_stringURLSafe($this->alias);
+
+        if (trim(str_replace('-', '', $this->alias)) == '')
+        {
+            $this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
+        }
+
+        // Verify that the alias is unique
+        $table = JTable::getInstance('Dish', 'DZFoodMenuTable');
+        if ($table->load(array('alias' => $this->alias)) && ($table->id != $this->id || $this->id == 0))
+        {
+            $this->setError(JText::_('COM_DZFOODMENU_ERROR_UNIQUE_ALIAS'));
+            return false;
+        }
         return parent::check();
     }
 
@@ -203,6 +258,14 @@ class DzfoodmenuTabledish extends JTable {
         return $assetParentId;
     }
     
-    
+    protected function _stringURLSafe($url) {
+        setlocale(LC_ALL, 'en_US.UTF8');
+        $clean = iconv('UTF-8', 'ASCII//TRANSLIT', $url);
+        $clean = preg_replace("/[^a-zA-Z0-9\/_| -]/", '', $clean);
+        $clean = strtolower(trim($clean, '-'));
+        $clean = preg_replace("/[\/_| -]+/", '-', $clean);
+
+        return $clean;
+    }
 
 }

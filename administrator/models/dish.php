@@ -90,14 +90,83 @@ class DzfoodmenuModeldish extends JModelAdmin
 	public function getItem($pk = null)
 	{
 		if ($item = parent::getItem($pk)) {
-
+            
 			//Do any procesing on fields here if needed
-
+            $registry = new JRegistry();
+            $registry->loadString($item->prices);
+            $item->prices = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->images);
+            $item->images = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->saleoff);
+            $item->saleoff = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->alternative);
+            $item->alternative = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->metadata);
+            $item->metadata = $registry->toArray();
+            
+            if (!empty($item->id))
+            {
+                $item->tags = new JHelperTags;
+                $item->tags->getTagIds($item->id, 'com_dzfoodmenu.dish');
+            }
 		}
 
 		return $item;
 	}
 
+	/**
+     * Method to toggle the featured setting of dishes.
+     *
+     * @param   array    The ids of the items to toggle.
+     * @param   integer  The value to toggle to.
+     *
+     * @return  boolean  True on success.
+     */
+    public function featured($pks, $value = 0)
+    {
+        // Sanitize the ids.
+        $pks = (array) $pks;
+        JArrayHelper::toInteger($pks);
+
+        if (empty($pks))
+        {
+            $this->setError(JText::_('JERROR_NO_ITEMS_SELECTED'));
+            return false;
+        }
+
+        $table = $this->getTable('Dish', 'DZFoodMenuTable');
+
+        try
+        {
+            $db = $this->getDbo();
+            $query = $db->getQuery(true)
+                        ->update($db->quoteName('#__dzfoodmenu_dishes'))
+                        ->set('featured = ' . (int) $value)
+                        ->where('id IN (' . implode(',', $pks) . ')');
+            $db->setQuery($query);
+            $db->execute();
+        }
+        catch (Exception $e)
+        {
+            $this->setError($e->getMessage());
+            return false;
+        }
+
+        $table->reorder();
+
+        $this->cleanCache();
+
+        return true;
+    }
+    
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 *

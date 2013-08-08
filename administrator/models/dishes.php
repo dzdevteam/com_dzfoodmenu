@@ -183,6 +183,19 @@ class DzfoodmenuModeldishes extends JModelList {
     public function getItems() {
         $items = parent::getItems();
         
+        foreach ($items as &$item) {
+            $registry = new JRegistry();
+            $registry->loadString($item->images);
+            $item->images = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->prices);
+            $item->prices = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->saleoff);
+            $item->saleoff = $registry->toArray();
+        }
         return $items;
     }
 
