@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `#__dzfoodmenu_combos` (
 `total_price` VARCHAR(255)  NOT NULL ,
 `combo_price` VARCHAR(255)  NOT NULL ,
 `dishes` TEXT NOT NULL ,
+`alternative` TEXT NOT NULL ,
 `metakey` TEXT NOT NULL ,
 `metadesc` TEXT NOT NULL ,
 `metadata` TEXT NOT NULL ,
@@ -51,3 +52,4 @@ PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8_general_ci;
 
 INSERT INTO `#__content_types` (`type_id`, `type_title`, `type_alias`, `table`, `rules`, `field_mappings`, `router`) VALUES (NULL, 'DZ Food Menu Dish', 'com_dzfoodmenu.dish', '{"special":{"dbtable":"#__dzfoodmenu_dishes","key":"id","type":"Dish","prefix":"DZFoodMenuTable","config":"array()"}}', '', '{"common":[{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"alias","core_body":"description", "core_params":"params", "core_metadata":"metadata", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "asset_id":"asset_id"}]}', 'DZFoodMenuHelperRoute::getDishRoute');
+INSERT INTO `#__content_types` (`type_id`, `type_title`, `type_alias`, `table`, `rules`, `field_mappings`, `router`) VALUES (NULL, 'DZ Food Menu Combo', 'com_dzfoodmenu.combo', '{"special":{"dbtable":"#__dzfoodmenu_combos","key":"id","type":"Combo","prefix":"DZFoodMenuTable","config":"array()"}}', '', '{"common":[{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"alias","core_body":"description", "core_params":"params", "core_metadata":"metadata", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc", "asset_id":"asset_id"}]}', 'DZFoodMenuHelperRoute::getComboRoute');

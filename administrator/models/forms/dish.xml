@@ -136,7 +136,7 @@
                 <field
                     name="description"
                     label="COM_DZFOODMENU_FORM_LBL_DISH_ALT_DESCRIPTION"
-                    description="COM_DZFOODMENU_FORM_DISH_GROUP_ALT_DESCRIPTION"
+                    description="COM_DZFOODMENU_FORM_DESC_DISH_ALT_DESCRIPTION"
                     type="editor" />
                 <field
                     name="note"

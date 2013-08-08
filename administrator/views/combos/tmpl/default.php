@@ -18,6 +18,7 @@ JHtml::_('formbehavior.chosen', 'select');
 // Import CSS
 $document = JFactory::getDocument();
 $document->addStyleSheet('components/com_dzfoodmenu/assets/css/dzfoodmenu.css');
+$document->addScript('//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js');
 
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
@@ -111,10 +112,13 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
                     
 				<th class='left'>
-				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_COMBOS_CREATED_BY', 'a.created_by', $listDirn, $listOrder); ?>
-				</th>
-				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_COMBOS_TITLE', 'a.title', $listDirn, $listOrder); ?>
+				</th>
+				<th class="center">
+				<?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_IMAGE'); ?>
+				</th>
+				<th class="left">
+				<?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_DISHES'); ?>
 				</th>
 				<th class='left'>
 				<?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_COMBOS_TOTAL_PRICE', 'a.total_price', $listDirn, $listOrder); ?>
@@ -186,10 +190,6 @@ if (!empty($this->extra_sidebar)) {
                 <?php endif; ?>
                     
 				<td>
-
-					<?php echo $item->created_by; ?>
-				</td>
-				<td>
 				<?php if (isset($item->checked_out) && $item->checked_out) : ?>
 					<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'combos.', $canCheckin); ?>
 				<?php endif; ?>
@@ -200,6 +200,16 @@ if (!empty($this->extra_sidebar)) {
 					<?php echo $this->escape($item->title); ?>
 				<?php endif; ?>
 				</td>
+				<td class="center">
+                    <?php if (!empty($item->image)) { ?>
+                    <img src="<?php echo JUri::root().$item->image; ?>" width="150"/>
+                    <?php } else { ?>
+                    <img src="holder.js/150x100" />
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php echo $item->dishes; ?>
+                </td>
 				<td>
 
 					<?php echo $item->total_price; ?>

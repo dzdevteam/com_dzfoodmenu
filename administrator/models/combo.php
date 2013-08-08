@@ -101,7 +101,19 @@ class DzfoodmenuModelcombo extends JModelAdmin
 		if ($item = parent::getItem($pk)) {
 
 			//Do any procesing on fields here if needed
-
+            $registry = new JRegistry();
+            $registry->loadString($item->alternative);
+            $item->alternative = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->metadata);
+            $item->metadata = $registry->toArray();
+            
+            if (!empty($item->id))
+            {
+                $item->tags = new JHelperTags;
+                $item->tags->getTagIds($item->id, 'com_dzfoodmenu.dish');
+            }
 		}
 
 		return $item;

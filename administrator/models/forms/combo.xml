@@ -2,158 +2,139 @@
 <form>
 	<fieldset>
 
-              <field name="id" type="text" default="0" label="COM_DZFOODMENU_FORM_LBL_COMBO_ID"
+        <field name="id" type="text" default="0" label="COM_DZFOODMENU_FORM_LBL_COMBO_ID"
             readonly="true" class="readonly"
             description="JGLOBAL_FIELD_ID_DESC" /> 
 
-       <field name="created_by" type="createdby" default="" 
+        <field name="created_by" type="createdby" default="" 
             label="COM_DZFOODMENU_FORM_LBL_COMBO_CREATED_BY"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_CREATED_BY"  /> 
 
-       <field name="title" type="text"
-                
+        <field name="title" type="text"
             label="COM_DZFOODMENU_FORM_LBL_COMBO_TITLE"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_TITLE" 
-                
-                
-                 required="true" 
-            filter="raw" /> 
+            required="true"     
+            filter="string" /> 
 
-       <field name="alias" type="text"
-                
+        <field name="alias" type="text"
             label="COM_DZFOODMENU_FORM_LBL_COMBO_ALIAS"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_ALIAS" 
-                
-                
-                
-            filter="raw" /> 
+            filter="string" /> 
 
-       <field name="description" type="editor"
-                
+        <field name="description" type="editor"
             label="COM_DZFOODMENU_FORM_LBL_COMBO_DESCRIPTION"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_DESCRIPTION" 
-                
-                
-                
-            filter="raw" /> 
+            filter="safehtml" /> 
 
-       <field name="image" type="media"
-                
+        <field name="image" type="media"
             label="COM_DZFOODMENU_FORM_LBL_COMBO_IMAGE"
-            description="COM_DZFOODMENU_FORM_DESC_COMBO_IMAGE" 
-                
-                
-                
-            filter="raw"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_IMAGE"
             directory="/" /> 
 
-       <field name="total_price" type="text"
-                
+        <field name="total_price" type="text"
             label="COM_DZFOODMENU_FORM_LBL_COMBO_TOTAL_PRICE"
-            description="COM_DZFOODMENU_FORM_DESC_COMBO_TOTAL_PRICE" 
-                
-                
-                
-            filter="int" /> 
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_TOTAL_PRICE"
+            filter="int" class="validate-numeric" /> 
 
        <field name="combo_price" type="text"
-                
             label="COM_DZFOODMENU_FORM_LBL_COMBO_COMBO_PRICE"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_COMBO_PRICE" 
-                
-                
-                
-            filter="int" /> 
+            filter="int" class="validate-numeric" /> 
 
        <field name="dishes" type="sql" class="inputbox"
-        
             label="COM_DZFOODMENU_FORM_LBL_COMBO_DISHES"
-            description="COM_DZFOODMENU_FORM_DESC_COMBO_DISHES" 
-        
-        multiple="multiple"
-        
-        
-        query="SELECT 0 AS `id`, '- Select Dishes -' AS `title` UNION SELECT `id`, `title` FROM `#__dzfoodmenu_dishes`" key_field="id" value_field="title"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_DISHES"         
+            multiple="multiple"
+            query="SELECT `id`, `title` FROM `#__dzfoodmenu_dishes`" key_field="id" value_field="title"
          /> 
 
        <field name="filter_dishes" type="sql" class="inputbox"
             onchange="this.form.submit();"
             query="SELECT 0 AS `id`, '- Select Dishes -' AS `title` UNION SELECT `id`, `title` FROM `#__dzfoodmenu_dishes`" key_field="id" value_field="title"
              /> 
-
+        <fields name="alternative">
+            <fieldset name="alternative">
+                <field
+                    name="title"
+                    label="COM_DZFOODMENU_FORM_LBL_COMBO_ALT_TITLE"
+                    description="COM_DZFOODMENU_FORM_DESC_COMBO_ALT_TITLE"
+                    type="text" filter="string"/>
+                <field
+                    name="description"
+                    label="COM_DZFOODMENU_FORM_LBL_COMBO_ALT_DESCRIPTION"
+                    description="COM_DZFOODMENU_FORM_DESC_COMBO_ALT_DESCRIPTION"
+                    type="editor" filter="safehtml"/>
+            </fieldset>
+        </fields>
        <field name="metakey" type="textarea"
-                
             label="COM_DZFOODMENU_FORM_LBL_COMBO_METAKEY"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_METAKEY" 
-                
-                
-                
             cols="100"
             rows="8"
             filter="string" /> 
 
        <field name="metadesc" type="textarea"
-                
             label="COM_DZFOODMENU_FORM_LBL_COMBO_METADESC"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_METADESC" 
-                
-                
-                
             cols="100"
             rows="8"
             filter="string" /> 
+        
+        <field name="tags" type="tag" mode="ajax" custom="allow"
+            label="JTAG" description="JTAG_DESC"
+            class="inputbox small" multiple="true" />
+            
+        <fields name="metadata">
+            <fieldset name="jmetadata"
+                label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+               
+                <field name="robots"
+                    type="list"
+                    label="JFIELD_METADATA_ROBOTS_LABEL"
+                    description="JFIELD_METADATA_ROBOTS_DESC"
+                    labelclass="control-label">
+                    <option value="">JGLOBAL_USE_GLOBAL</option>
+                    <option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+                    <option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+                    <option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+                    <option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+                </field>                            
+            </fieldset>
+        </fields>
 
-       <field name="metadata" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_COMBO_METADATA"
-            description="COM_DZFOODMENU_FORM_DESC_COMBO_METADATA"  /> 
+        <fields name="params"> 
+        </fields>
 
-       <field name="params" type="editor" buttons="true"
-        class="inputbox"
-        filter="safehtml"
-        
-        
-        
-        
-            label="COM_DZFOODMENU_FORM_LBL_COMBO_PARAMS"
-            description="COM_DZFOODMENU_FORM_DESC_COMBO_PARAMS"  /> 
+        <field
+            name="state"
+            type="list"
+            label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC"
+            class="inputbox"
+            size="1"
+            default="1">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field> 
 
-         <field
-        name="state"
-        type="list"
-        label="JSTATUS"
-        description="JFIELD_PUBLISHED_DESC"
-        class="inputbox"
-        size="1"
-        default="1">
-        <option value="1">JPUBLISHED</option>
-        <option value="0">JUNPUBLISHED</option>
-    </field> 
-
-                        <field name="checked_out" type="hidden" filter="unset" />
+        <field name="checked_out" type="hidden" filter="unset" />
         <field name="checked_out_time" type="hidden" filter="unset" /> 
 
- </fieldset> 
+    </fieldset> 
 
- <fieldset 
-                        name="accesscontrol">
-                       <field name="asset_id" type="hidden" filter="unset" />
-                       <field name="rules"
-                            type="rules"
-                            label="JFIELD_RULES_LABEL"
-                            translate_label="false"
-                            filter="rules"
-                            validate="rules"
-                            class="inputbox"
-                            component="com_dzfoodmenu"
-                            section="combo"
-                        />
-
-	</fieldset>
+    <fieldset 
+        name="accesscontrol">
+        <field name="asset_id" type="hidden" filter="unset" />
+        <field name="rules"
+            type="rules"
+            label="JFIELD_RULES_LABEL"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_dzfoodmenu"
+            section="combo"
+        />
+    </fieldset>
 
 </form>
