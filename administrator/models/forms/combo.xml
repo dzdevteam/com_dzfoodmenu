@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+
+              <field name="id" type="text" default="0" label="COM_DZFOODMENU_FORM_LBL_COMBO_ID"
+            readonly="true" class="readonly"
+            description="JGLOBAL_FIELD_ID_DESC" /> 
+
+       <field name="created_by" type="createdby" default="" 
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_CREATED_BY"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_CREATED_BY"  /> 
+
+       <field name="title" type="text"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_TITLE"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_TITLE" 
+                
+                
+                 required="true" 
+            filter="raw" /> 
+
+       <field name="alias" type="text"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_ALIAS"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_ALIAS" 
+                
+                
+                
+            filter="raw" /> 
+
+       <field name="description" type="editor"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_DESCRIPTION"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_DESCRIPTION" 
+                
+                
+                
+            filter="raw" /> 
+
+       <field name="image" type="media"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_IMAGE"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_IMAGE" 
+                
+                
+                
+            filter="raw"
+            directory="/" /> 
+
+       <field name="total_price" type="text"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_TOTAL_PRICE"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_TOTAL_PRICE" 
+                
+                
+                
+            filter="int" /> 
+
+       <field name="combo_price" type="text"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_COMBO_PRICE"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_COMBO_PRICE" 
+                
+                
+                
+            filter="int" /> 
+
+       <field name="dishes" type="sql" class="inputbox"
+        
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_DISHES"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_DISHES" 
+        
+        multiple="multiple"
+        
+        
+        query="SELECT 0 AS `id`, '- Select Dishes -' AS `title` UNION SELECT `id`, `title` FROM `#__dzfoodmenu_dishes`" key_field="id" value_field="title"
+         /> 
+
+       <field name="filter_dishes" type="sql" class="inputbox"
+            onchange="this.form.submit();"
+            query="SELECT 0 AS `id`, '- Select Dishes -' AS `title` UNION SELECT `id`, `title` FROM `#__dzfoodmenu_dishes`" key_field="id" value_field="title"
+             /> 
+
+       <field name="metakey" type="textarea"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_METAKEY"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_METAKEY" 
+                
+                
+                
+            cols="100"
+            rows="8"
+            filter="string" /> 
+
+       <field name="metadesc" type="textarea"
+                
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_METADESC"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_METADESC" 
+                
+                
+                
+            cols="100"
+            rows="8"
+            filter="string" /> 
+
+       <field name="metadata" type="editor" buttons="true"
+        class="inputbox"
+        filter="safehtml"
+        
+        
+        
+        
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_METADATA"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_METADATA"  /> 
+
+       <field name="params" type="editor" buttons="true"
+        class="inputbox"
+        filter="safehtml"
+        
+        
+        
+        
+            label="COM_DZFOODMENU_FORM_LBL_COMBO_PARAMS"
+            description="COM_DZFOODMENU_FORM_DESC_COMBO_PARAMS"  /> 
+
+         <field
+        name="state"
+        type="list"
+        label="JSTATUS"
+        description="JFIELD_PUBLISHED_DESC"
+        class="inputbox"
+        size="1"
+        default="1">
+        <option value="1">JPUBLISHED</option>
+        <option value="0">JUNPUBLISHED</option>
+    </field> 
+
+                        <field name="checked_out" type="hidden" filter="unset" />
+        <field name="checked_out_time" type="hidden" filter="unset" /> 
+
+ </fieldset> 
+
+ <fieldset 
+                        name="accesscontrol">
+                       <field name="asset_id" type="hidden" filter="unset" />
+                       <field name="rules"
+                            type="rules"
+                            label="JFIELD_RULES_LABEL"
+                            translate_label="false"
+                            filter="rules"
+                            validate="rules"
+                            class="inputbox"
+                            component="com_dzfoodmenu"
+                            section="combo"
+                        />
+
+	</fieldset>
+
+</form>
