@@ -86,6 +86,38 @@ class DzfoodmenuModelDish extends JModelForm
 				// Convert the JTable to a clean JObject.
 				$properties = $table->getProperties(1);
 				$this->_item = JArrayHelper::toObject($properties, 'JObject');
+				
+				// Convert metadata field to JRegistry
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->metadata);
+                $this->_item->metadata = $registry;
+                
+                // Convert alternative field to array
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->alternative);
+                $this->_item->alternative = $registry->toArray();
+                
+                // Convert prices field to array
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->prices);
+                $this->_item->prices = $registry->toArray();
+                
+                // Convert saleoff field to array
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->saleoff);
+                $this->_item->saleoff = $registry->toArray();
+                
+                // Convert images field to array
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->images);
+                $this->_item->images = $registry->toArray();
+                
+                if ($this->_item->id) {
+                    $tags = new JHelperTags;
+                    $tags->getItemTags('com_dzfoodmenu.dish', $this->_item->id);
+                    $tagLayout = new JLayoutFile('joomla.content.tags');
+                    $this->_item->tags = $tagLayout->render($tags->itemTags);
+                }
 			} elseif ($error = $table->getError()) {
 				$this->setError($error);
 			}

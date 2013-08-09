@@ -19,20 +19,13 @@ defined('_JEXEC') or die;
 
 <div class="items">
     <ul class="items_list">
-<?php $show = false; ?>
-        <?php foreach ($this->items as $item) : ?>
-
-            
-				<?php
-					if($item->state == 1 || ($item->state == 0 && JFactory::getUser()->authorise('core.edit.own',' com_dzfoodmenu.combo.'.$item->id))):
-						$show = true;
-						?>
-							<li>
-								<a href="<?php echo JRoute::_('index.php?option=com_dzfoodmenu&view=combo&id=' . (int)$item->id); ?>"><?php echo $item->title; ?></a>
-							</li>
-						<?php endif; ?>
-
-<?php endforeach; ?>
+        <?php $show = false; ?>
+        <?php foreach ($this->items as $item) : ?>           
+        <?php $show = true; ?>
+            <li>
+                <a href="<?php echo $item->link ?>"><?php echo $item->title; ?></a>
+            </li>
+        <?php endforeach; ?>
         <?php
         if (!$show):
             echo JText::_('COM_DZFOODMENU_NO_ITEMS');

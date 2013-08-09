@@ -62,9 +62,9 @@ class DzfoodmenuViewCombo extends JViewLegacy {
 	 */
 	protected function _prepareDocument()
 	{
-		$app	= JFactory::getApplication();
-		$menus	= $app->getMenu();
-		$title	= null;
+        $app   = JFactory::getApplication();
+		$menus = $app->getMenu();
+		$title = null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
@@ -87,20 +87,37 @@ class DzfoodmenuViewCombo extends JViewLegacy {
 		}
 		$this->document->setTitle($title);
 
-		if ($this->params->get('menu-meta_description'))
-		{
-			$this->document->setDescription($this->params->get('menu-meta_description'));
-		}
+        if ($this->item->metadesc)
+        {
+            $this->document->setDescription($this->item->metadesc);
+        }
+        elseif (!$this->item->metadesc && $this->params->get('menu-meta_description'))
+        {
+            $this->document->setDescription($this->params->get('menu-meta_description'));
+        }
 
-		if ($this->params->get('menu-meta_keywords'))
-		{
-			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
-		}
+        if ($this->item->metakey)
+        {
+            $this->document->setMetadata('keywords', $this->item->metakey);
+        }
+        elseif (!$this->item->metakey && $this->params->get('menu-meta_keywords'))
+        {
+            $this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
+        }
 
-		if ($this->params->get('robots'))
-		{
-			$this->document->setMetadata('robots', $this->params->get('robots'));
-		}
+        if ($this->params->get('robots'))
+        {
+            $this->document->setMetadata('robots', $this->params->get('robots'));
+        }
+        
+        $mdata = $this->item->metadata->toArray();
+        foreach ($mdata as $k => $v)
+        {
+            if ($v)
+            {
+                $this->document->setMetadata($k, $v);
+            }
+        }
 	}        
     
 }

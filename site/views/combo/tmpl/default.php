@@ -19,19 +19,6 @@ $lang->load('com_dzfoodmenu', JPATH_ADMINISTRATOR);
     <div class="item_fields">
 
         <ul class="fields_list">
-
-            			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_ID'); ?>:
-			<?php echo $this->item->id; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_ORDERING'); ?>:
-			<?php echo $this->item->ordering; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_STATE'); ?>:
-			<?php echo $this->item->state; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_CHECKED_OUT'); ?>:
-			<?php echo $this->item->checked_out; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_CHECKED_OUT_TIME'); ?>:
-			<?php echo $this->item->checked_out_time; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_CREATED_BY'); ?>:
-			<?php echo $this->item->created_by; ?></li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_TITLE'); ?>:
 			<?php echo $this->item->title; ?></li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_ALIAS'); ?>:
@@ -46,15 +33,11 @@ $lang->load('com_dzfoodmenu', JPATH_ADMINISTRATOR);
 			<?php echo $this->item->combo_price; ?></li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_DISHES'); ?>:
 			<?php echo $this->item->dishes; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_METAKEY'); ?>:
-			<?php echo $this->item->metakey; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_METADESC'); ?>:
-			<?php echo $this->item->metadesc; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_METADATA'); ?>:
-			<?php echo $this->item->metadata; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_PARAMS'); ?>:
-			<?php echo $this->item->params; ?></li>
-
+			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_ALT_TITLE'); ?>:
+            <?php echo $this->item->alternative['title']; ?></li>
+            <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_ALT_DESCRIPTION'); ?>:
+            <?php echo $this->item->alternative['description']; ?></li>
+            <li>Tags: <?php echo $this->item->tags; ?></li>
 
         </ul>
 

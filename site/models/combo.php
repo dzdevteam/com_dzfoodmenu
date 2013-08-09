@@ -86,6 +86,23 @@ class DzfoodmenuModelCombo extends JModelForm
 				// Convert the JTable to a clean JObject.
 				$properties = $table->getProperties(1);
 				$this->_item = JArrayHelper::toObject($properties, 'JObject');
+				
+				// Convert metadata field to JRegistry
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->metadata);
+                $this->_item->metadata = $registry;
+                
+                // Convert alternative field to JRegistry
+                $registry = new JRegistry();
+                $registry->loadString($this->_item->alternative);
+                $this->_item->alternative = $registry->toArray();
+                
+                if ($this->_item->id) {
+                    $tags = new JHelperTags;
+                    $tags->getItemTags('com_dzfoodmenu.combo', $this->_item->id);
+                    $tagLayout = new JLayoutFile('joomla.content.tags');
+                    $this->_item->tags = $tagLayout->render($tags->itemTags);
+                }
 			} elseif ($error = $table->getError()) {
 				$this->setError($error);
 			}

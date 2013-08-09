@@ -19,21 +19,6 @@ $lang->load('com_dzfoodmenu', JPATH_ADMINISTRATOR);
     <div class="item_fields">
 
         <ul class="fields_list">
-
-            			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ID'); ?>:
-			<?php echo $this->item->id; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ORDERING'); ?>:
-			<?php echo $this->item->ordering; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_STATE'); ?>:
-			<?php echo $this->item->state; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_CHECKED_OUT'); ?>:
-			<?php echo $this->item->checked_out; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_CHECKED_OUT_TIME'); ?>:
-			<?php echo $this->item->checked_out_time; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_CREATED'); ?>:
-			<?php echo $this->item->created; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_CREATED_BY'); ?>:
-			<?php echo $this->item->created_by; ?></li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_TITLE'); ?>:
 			<?php echo $this->item->title; ?></li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ALIAS'); ?>:
@@ -43,25 +28,44 @@ $lang->load('com_dzfoodmenu', JPATH_ADMINISTRATOR);
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_DESCRIPTION'); ?>:
 			<?php echo $this->item->description; ?></li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_NOTE'); ?>:
-			<?php echo $this->item->note; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES'); ?>:
-			<?php echo $this->item->prices; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_SALEOFF'); ?>:
-			<?php echo $this->item->saleoff; ?></li>
+			<?php echo $this->item->note; ?></li>   
+			<li><?php echo JText::_('COM_DZFOODMENU_FORM_FIELDSET_DISH_PRICES'); ?>:
+			<ul>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>:
+                <?php echo $this->item->prices['medium']; ?></li>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>:
+                <?php echo $this->item->prices['large']; ?></li>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>:
+                <?php echo $this->item->prices['special']; ?></li>
+            </ul>
+            </li>
+            <li><?php echo JText::_('COM_DZFOODMENU_FORM_FIELDSET_DISH_SALEOFF'); ?>:
+            <ul>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>:
+                <?php echo $this->item->saleoff['medium']; ?></li>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>:
+                <?php echo $this->item->saleoff['large']; ?></li>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>:
+                <?php echo $this->item->saleoff['special']; ?></li>
+            </ul>
+            </li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_IMAGES'); ?>:
-			<?php echo $this->item->images; ?></li>
+            <ul>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_IMAGES_THUMBNAIL'); ?>:
+                <?php echo $this->item->images['thumbnail']; ?></li>
+                <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_IMAGES_FULL'); ?>:
+                <?php echo $this->item->images['full']; ?></li>
+			</ul>
+			</li>
 			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_FEATURED'); ?>:
 			<?php echo $this->item->featured; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ALTERNATIVE'); ?>:
-			<?php echo $this->item->alternative; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PARAMS'); ?>:
-			<?php echo $this->item->params; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_METAKEY'); ?>:
-			<?php echo $this->item->metakey; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_METADESC'); ?>:
-			<?php echo $this->item->metadesc; ?></li>
-			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_METADATA'); ?>:
-			<?php echo $this->item->metadata; ?></li>
+			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ALT_TITLE'); ?>:
+			<?php echo $this->item->alternative['title']; ?></li>
+			<li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ALT_DESCRIPTION'); ?>:
+            <?php echo $this->item->alternative['description']; ?></li>
+            <li><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_ALT_NOTE'); ?>:
+            <?php echo $this->item->alternative['note']; ?></li>
+			<li>Tags: <?php echo $this->item->tags; ?></li>
 
 
         </ul>

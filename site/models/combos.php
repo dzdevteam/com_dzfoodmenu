@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
+require_once JPATH_COMPONENT.'/helpers/route.php';
 
 /**
  * Methods supporting a list of Dzfoodmenu records.
@@ -106,12 +107,21 @@ class DzfoodmenuModelCombos extends JModelList {
 		if ($filter_dishes) {
 			$query->where("a.dishes = '".$filter_dishes."'");
 		}
-
+        
+        // Only show published item
+        $query->where("a.state = 1");
+        
         return $query;
     }
 
     public function getItems() {
-        return parent::getItems();
+        $items = parent::getItems();
+        
+        foreach ($items as &$item) {
+            $item->link = JRoute::_(DZFoodMenuHelperRoute::getComboRoute($item->id));
+        }
+        
+        return $items;
     }
 
 }

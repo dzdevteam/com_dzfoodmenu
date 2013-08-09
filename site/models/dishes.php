@@ -113,11 +113,20 @@ class DzfoodmenuModelDishes extends JModelList {
 			$query->where("a.featured = '".$filter_featured."'");
 		}
 
+        // Only show published item
+        $query->where("a.state = 1");
+        
         return $query;
     }
 
     public function getItems() {
-        return parent::getItems();
+        $items = parent::getItems();
+        
+        foreach ($items as &$item) {
+            $item->link = JRoute::_(DZFoodMenuHelperRoute::getDishRoute($item->id));
+        }
+        
+        return $items;
     }
 
 }
