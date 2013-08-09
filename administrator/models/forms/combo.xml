@@ -45,7 +45,7 @@
             label="COM_DZFOODMENU_FORM_LBL_COMBO_DISHES"
             description="COM_DZFOODMENU_FORM_DESC_COMBO_DISHES"         
             multiple="multiple"
-            query="SELECT `id`, `title` FROM `#__dzfoodmenu_dishes`" key_field="id" value_field="title"
+            query="SELECT `id`, `title` FROM `#__dzfoodmenu_dishes` WHERE `state` = 1" key_field="id" value_field="title"
          /> 
 
        <field name="filter_dishes" type="sql" class="inputbox"

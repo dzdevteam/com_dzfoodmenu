@@ -5,4 +5,24 @@
                         <![CDATA[COM_DZFOODMENU_TITLE_LIST_VIEW_COMBOS_DESC]]>
         </message>
 	</layout>
+    <fields name="request">
+        <fieldset name="request">
+            <field name="filter_order"
+                type="list" default="ordering"
+                label="COM_DZFOODMENU_FORM_LBL_FILTER_ORDER"
+                description="COM_DZFOODMENU_FORM_DESC_FILTER_ORDER">
+                <option value="a.title">COM_DZFOODMENU_OPTION_TITLE</option>
+                <option value="a.ordering">COM_DZFOODMENU_OPTION_ORDERING</option>
+                <option value="a.total_price">COM_DZFOODMENU_OPTION_TOTAL_PRICE</option>
+                <option value="a.combo_price">COM_DZFOODMENU_OPTION_COMBO_PRICE</option>
+            </field>
+            <field name="filter_order_Dir"
+                type="list" default="ASC"
+                label="JGLOBAL_ORDER_DIRECTION_LABEL"
+                description="JGLOBAL_ORDER_DIRECTION_DESC">
+                <option value="ASC">JGLOBAL_ORDER_ASCENDING</option>
+                <option value="DESC">JGLOBAL_ORDER_DESCENDING</option>
+            </field>
+        </fieldset>
+    </fields>
 </metadata>

@@ -10,6 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
+require_once JPATH_COMPONENT.'/helpers/route.php';
 
 /**
  * Methods supporting a list of Dzfoodmenu records.
@@ -24,6 +25,30 @@ class DzfoodmenuModelDishes extends JModelList {
      * @since    1.6
      */
     public function __construct($config = array()) {
+        if (empty($config['filter_fields'])) {
+            $config['filter_fields'] = array(
+                                'id', 'a.id',
+                'ordering', 'a.ordering',
+                'state', 'a.state',
+                'created', 'a.created',
+                'created_by', 'a.created_by',
+                'title', 'a.title',
+                'alias', 'a.alias',
+                'catid', 'a.catid',
+                'description', 'a.description',
+                'note', 'a.note',
+                'prices', 'a.prices',
+                'saleoff', 'a.saleoff',
+                'images', 'a.images',
+                'featured', 'a.featured',
+                'alternative', 'a.alternative',
+                'params', 'a.params',
+                'metakey', 'a.metakey',
+                'metadesc', 'a.metadesc',
+                'metadata', 'a.metadata',
+
+            );
+        }
         parent::__construct($config);
     }
 
@@ -34,7 +59,7 @@ class DzfoodmenuModelDishes extends JModelList {
      *
      * @since	1.6
      */
-    protected function populateState($ordering = null, $direction = null) {
+    protected function populateState($ordering = 'ordering', $direction = 'ASC') {
 
         // Initialise variables.
         $app = JFactory::getApplication();
@@ -46,10 +71,34 @@ class DzfoodmenuModelDishes extends JModelList {
         $limitstart = JFactory::getApplication()->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
 
+        $orderCol = $app->input->get('filter_order', 'a.ordering');
+        if (!in_array($orderCol, $this->filter_fields))
+        {
+            $orderCol = 'a.ordering';
+        }
+        $this->setState('list.ordering', $orderCol);
+
+        $listOrder = $app->input->get('filter_order_Dir', 'ASC');
+        if (!in_array(strtoupper($listOrder), array('ASC', 'DESC', '')))
+        {
+            $listOrder = 'ASC';
+        }
+        $this->setState('list.direction', $listOrder);
         
-		if(empty($ordering)) {
-			$ordering = 'a.ordering';
-		}
+        $filter_comboid = $app->input->getInt('filter_comboid', 0);
+        if ($filter_comboid) {
+            $this->setState('filter.comboid', $filter_comboid);
+        }
+        
+        $filter_featured = $app->input->getCmd('filter_featured', '');
+        if (is_int($filter_featured)) {
+            $this->setState('filter.featured', $filter_featured);
+        }
+        
+        $filter_catid = $app->input->getInt('filter_catid', 0);
+        if ($filter_catid) {
+            $this->setState('filter.catid', $filter_catid);
+        }
 
         // List state information.
         parent::populateState($ordering, $direction);
@@ -99,7 +148,11 @@ class DzfoodmenuModelDishes extends JModelList {
             }
         }
 
-        
+        // Filtering comboid
+        $filter_comboid = $this->state->get('filter.comboid');
+        if ($filter_comboid) {
+            $query->join('INNER', '#__dzfoodmenu_combos as c ON FIND_IN_SET(a.id, c.dishes) AND c.id = '.$filter_comboid);
+        }
 
 		//Filtering catid
 		$filter_catid = $this->state->get("filter.catid");
@@ -109,12 +162,15 @@ class DzfoodmenuModelDishes extends JModelList {
 
 		//Filtering featured
 		$filter_featured = $this->state->get("filter.featured");
-		if ($filter_featured) {
-			$query->where("a.featured = '".$filter_featured."'");
+		if (is_int($filter_featured)) {
+			$query->where("a.featured = ".$filter_featured);
 		}
 
         // Only show published item
         $query->where("a.state = 1");
+        
+        // Add the list ordering clause.
+        $query->order($this->getState('list.ordering', 'a.ordering') . ' ' . $this->getState('list.direction', 'ASC'));
         
         return $query;
     }

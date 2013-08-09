@@ -25,6 +25,26 @@ class DzfoodmenuModelCombos extends JModelList {
      * @since    1.6
      */
     public function __construct($config = array()) {
+        if (empty($config['filter_fields'])) {
+            $config['filter_fields'] = array(
+                                'id', 'a.id',
+                'ordering', 'a.ordering',
+                'state', 'a.state',
+                'created_by', 'a.created_by',
+                'title', 'a.title',
+                'alias', 'a.alias',
+                'description', 'a.description',
+                'image', 'a.image',
+                'total_price', 'a.total_price',
+                'combo_price', 'a.combo_price',
+                'dishes', 'a.dishes',
+                'metakey', 'a.metakey',
+                'metadesc', 'a.metadesc',
+                'metadata', 'a.metadata',
+                'params', 'a.params',
+
+            );
+        }
         parent::__construct($config);
     }
 
@@ -35,7 +55,7 @@ class DzfoodmenuModelCombos extends JModelList {
      *
      * @since	1.6
      */
-    protected function populateState($ordering = null, $direction = null) {
+    protected function populateState($ordering = 'ordering', $direction = 'ASC') {
 
         // Initialise variables.
         $app = JFactory::getApplication();
@@ -47,10 +67,19 @@ class DzfoodmenuModelCombos extends JModelList {
         $limitstart = JFactory::getApplication()->input->getInt('limitstart', 0);
         $this->setState('list.start', $limitstart);
 
-        
-		if(empty($ordering)) {
-			$ordering = 'a.ordering';
-		}
+        $orderCol = $app->input->get('filter_order', 'a.ordering');
+        if (!in_array($orderCol, $this->filter_fields))
+        {
+            $orderCol = 'a.ordering';
+        }
+        $this->setState('list.ordering', $orderCol);
+
+        $listOrder = $app->input->get('filter_order_Dir', 'ASC');
+        if (!in_array(strtoupper($listOrder), array('ASC', 'DESC', '')))
+        {
+            $listOrder = 'ASC';
+        }
+        $this->setState('list.direction', $listOrder);
 
         // List state information.
         parent::populateState($ordering, $direction);
@@ -110,6 +139,9 @@ class DzfoodmenuModelCombos extends JModelList {
         
         // Only show published item
         $query->where("a.state = 1");
+        
+        // Add the list ordering clause.
+        $query->order($this->getState('list.ordering', 'a.ordering') . ' ' . $this->getState('list.direction', 'ASC'));
         
         return $query;
     }
