@@ -57,7 +57,7 @@ class DzfoodmenuModelDishes extends JModelList {
      *
      * Note. Calling getState in this method will result in recursion.
      *
-     * @since	1.6
+     * @since   1.6
      */
     protected function populateState($ordering = 'ordering', $direction = 'ASC') {
 
@@ -107,8 +107,8 @@ class DzfoodmenuModelDishes extends JModelList {
     /**
      * Build an SQL query to load the list data.
      *
-     * @return	JDatabaseQuery
-     * @since	1.6
+     * @return  JDatabaseQuery
+     * @since   1.6
      */
     protected function getListQuery() {
         // Create a new query object.
@@ -129,12 +129,12 @@ class DzfoodmenuModelDishes extends JModelList {
     $query->select('uc.name AS editor');
     $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
     
-		// Join over the created by field 'created_by'
-		$query->select('created_by.name AS created_by');
-		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-		// Join over the category 'catid'
-		$query->select('catid.title AS catid_title');
-		$query->join('LEFT', '#__categories AS catid ON catid.id = a.catid');
+        // Join over the created by field 'created_by'
+        $query->select('created_by.name AS created_by');
+        $query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+        // Join over the category 'catid'
+        $query->select('catid.title AS catid_title');
+        $query->join('LEFT', '#__categories AS catid ON catid.id = a.catid');
         
 
         // Filter by search in title
@@ -154,17 +154,17 @@ class DzfoodmenuModelDishes extends JModelList {
             $query->join('INNER', '#__dzfoodmenu_combos as c ON FIND_IN_SET(a.id, c.dishes) AND c.id = '.$filter_comboid);
         }
 
-		//Filtering catid
-		$filter_catid = $this->state->get("filter.catid");
-		if ($filter_catid) {
-			$query->where("a.catid = '".$filter_catid."'");
-		}
+        //Filtering catid
+        $filter_catid = $this->state->get("filter.catid");
+        if ($filter_catid) {
+            $query->where("a.catid = '".$filter_catid."'");
+        }
 
-		//Filtering featured
-		$filter_featured = $this->state->get("filter.featured");
-		if (is_int($filter_featured)) {
-			$query->where("a.featured = ".$filter_featured);
-		}
+        //Filtering featured
+        $filter_featured = $this->state->get("filter.featured");
+        if (is_int($filter_featured)) {
+            $query->where("a.featured = ".$filter_featured);
+        }
 
         // Only show published item
         $query->where("a.state = 1");

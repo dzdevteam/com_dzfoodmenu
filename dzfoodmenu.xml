@@ -38,18 +38,18 @@
     </files>
     <languages folder="site">
         
-			<language tag="en-GB">language/en-GB.com_dzfoodmenu.ini</language>
-			<language tag="vi-VN">language/vi-VN.com_dzfoodmenu.ini</language>
+            <language tag="en-GB">language/en-GB.com_dzfoodmenu.ini</language>
+            <language tag="vi-VN">language/vi-VN.com_dzfoodmenu.ini</language>
     </languages>
     <administration>
         <menu img="components/com_dzfoodmenu/assets/images/s_com_dzfoodmenu.png" >COM_DZFOODMENU</menu>
         <submenu>
             
-			<menu link="option=com_dzfoodmenu&amp;view=dishes" view="dishes" img="components/com_dzfoodmenu/assets/images/s_dishes.png" alt="Dzfoodmenu/Dishes">COM_DZFOODMENU_TITLE_DISHES</menu>
+            <menu link="option=com_dzfoodmenu&amp;view=dishes" view="dishes" img="components/com_dzfoodmenu/assets/images/s_dishes.png" alt="Dzfoodmenu/Dishes">COM_DZFOODMENU_TITLE_DISHES</menu>
 
-			<menu link="option=com_categories&amp;extension=com_dzfoodmenu.dishes.catid" view="categories" img="components/com_dzfoodmenu/assets/images/s_dishes.png" alt="Dzfoodmenu/Categories">COM_DZFOODMENU_DISHES_CATID</menu>
+            <menu link="option=com_categories&amp;extension=com_dzfoodmenu.dishes.catid" view="categories" img="components/com_dzfoodmenu/assets/images/s_dishes.png" alt="Dzfoodmenu/Categories">COM_DZFOODMENU_DISHES_CATID</menu>
 
-			<menu link="option=com_dzfoodmenu&amp;view=combos" view="combos" img="components/com_dzfoodmenu/assets/images/s_combos.png" alt="Dzfoodmenu/Combos">COM_DZFOODMENU_TITLE_COMBOS</menu>
+            <menu link="option=com_dzfoodmenu&amp;view=combos" view="combos" img="components/com_dzfoodmenu/assets/images/s_combos.png" alt="Dzfoodmenu/Combos">COM_DZFOODMENU_TITLE_COMBOS</menu>
 
         </submenu>
         <files folder="administrator">
@@ -68,10 +68,10 @@
         </files>
         <languages folder="administrator">
             
-			<language tag="en-GB">language/en-GB.com_dzfoodmenu.ini</language>
-			<language tag="en-GB">language/en-GB.com_dzfoodmenu.sys.ini</language>
-			<language tag="vi-VN">language/vi-VN.com_dzfoodmenu.ini</language>
-			<language tag="vi-VN">language/vi-VN.com_dzfoodmenu.sys.ini</language>
+            <language tag="en-GB">language/en-GB.com_dzfoodmenu.ini</language>
+            <language tag="en-GB">language/en-GB.com_dzfoodmenu.sys.ini</language>
+            <language tag="vi-VN">language/vi-VN.com_dzfoodmenu.ini</language>
+            <language tag="vi-VN">language/vi-VN.com_dzfoodmenu.sys.ini</language>
         </languages>
     </administration>
 </extension>

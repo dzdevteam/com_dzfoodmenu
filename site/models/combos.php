@@ -53,7 +53,7 @@ class DzfoodmenuModelCombos extends JModelList {
      *
      * Note. Calling getState in this method will result in recursion.
      *
-     * @since	1.6
+     * @since   1.6
      */
     protected function populateState($ordering = 'ordering', $direction = 'ASC') {
 
@@ -88,8 +88,8 @@ class DzfoodmenuModelCombos extends JModelList {
     /**
      * Build an SQL query to load the list data.
      *
-     * @return	JDatabaseQuery
-     * @since	1.6
+     * @return  JDatabaseQuery
+     * @since   1.6
      */
     protected function getListQuery() {
         // Create a new query object.
@@ -110,12 +110,12 @@ class DzfoodmenuModelCombos extends JModelList {
     $query->select('uc.name AS editor');
     $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
     
-		// Join over the created by field 'created_by'
-		$query->select('created_by.name AS created_by');
-		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-		// Join over the foreign key 'dishes'
-		$query->select('#__dzfoodmenu_dishes_412915.title AS dishes_title_412915');
-		$query->join('LEFT', '#__dzfoodmenu_dishes AS #__dzfoodmenu_dishes_412915 ON #__dzfoodmenu_dishes_412915.id = a.dishes');
+        // Join over the created by field 'created_by'
+        $query->select('created_by.name AS created_by');
+        $query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+        // Join over the foreign key 'dishes'
+        $query->select('#__dzfoodmenu_dishes_412915.title AS dishes_title_412915');
+        $query->join('LEFT', '#__dzfoodmenu_dishes AS #__dzfoodmenu_dishes_412915 ON #__dzfoodmenu_dishes_412915.id = a.dishes');
         
 
         // Filter by search in title
@@ -131,11 +131,11 @@ class DzfoodmenuModelCombos extends JModelList {
 
         
 
-		//Filtering dishes
-		$filter_dishes = $this->state->get("filter.dishes");
-		if ($filter_dishes) {
-			$query->where("a.dishes = '".$filter_dishes."'");
-		}
+        //Filtering dishes
+        $filter_dishes = $this->state->get("filter.dishes");
+        if ($filter_dishes) {
+            $query->where("a.dishes = '".$filter_dishes."'");
+        }
         
         // Only show published item
         $query->where("a.state = 1");

@@ -11,8 +11,8 @@
 defined('_JEXEC') or die;
 
 /**
- * @param	array	A named array
- * @return	array
+ * @param   array   A named array
+ * @return  array
  */
 function DzfoodmenuBuildRoute(&$query)
 {
@@ -137,12 +137,12 @@ function DzfoodmenuBuildRoute(&$query)
         }
     }
 
-	return $segments;
+    return $segments;
 }
 
 /**
- * @param	array	A named array
- * @param	array
+ * @param   array   A named array
+ * @param   array
  *
  * Formats:
  *
@@ -152,9 +152,9 @@ function DzfoodmenuBuildRoute(&$query)
  */
 function DzfoodmenuParseRoute($segments)
 {
-	$vars = array();
+    $vars = array();
     
-	$app = JFactory::getApplication();
+    $app = JFactory::getApplication();
     $menu = $app->getMenu();
     $menuItem = $menu->getActive();
     
@@ -180,5 +180,5 @@ function DzfoodmenuParseRoute($segments)
             $vars['view'] = $segments[0];
         }
     }
-	return $vars;
+    return $vars;
 }

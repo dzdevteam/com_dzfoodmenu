@@ -30,19 +30,19 @@ class DzfoodmenuTabledish extends JTable {
     /**
      * Overloaded bind function to pre-process the params.
      *
-     * @param	array		Named array
-     * @return	null|string	null is operation was satisfactory, otherwise returns an error
-     * @see		JTable:bind
-     * @since	1.5
+     * @param   array       Named array
+     * @return  null|string null is operation was satisfactory, otherwise returns an error
+     * @see     JTable:bind
+     * @since   1.5
      */
     public function bind($array, $ignore = '') {
 
         
-		$input = JFactory::getApplication()->input;
-		$task = $input->getString('task', '');
-		if(($task == 'save' || $task == 'apply') && (!JFactory::getUser()->authorise('core.edit.state','com_dzfoodmenu.dish.'.$array['id']) && $array['state'] == 1)){
-			$array['state'] = 0;
-		}
+        $input = JFactory::getApplication()->input;
+        $task = $input->getString('task', '');
+        if(($task == 'save' || $task == 'apply') && (!JFactory::getUser()->authorise('core.edit.state','com_dzfoodmenu.dish.'.$array['id']) && $array['state'] == 1)){
+            $array['state'] = 0;
+        }
 
         if (isset($array['params']) && is_array($array['params'])) {
             $registry = new JRegistry();
@@ -90,9 +90,9 @@ class DzfoodmenuTabledish extends JTable {
             $array['rules'] = $this->JAccessRulestoArray($array_jaccess);
         }
         //Bind the rules for ACL where supported.
-		if (isset($array['rules']) && is_array($array['rules'])) {
-			$this->setRules($array['rules']);
-		}
+        if (isset($array['rules']) && is_array($array['rules'])) {
+            $this->setRules($array['rules']);
+        }
 
         return parent::bind($array, $ignore);
     }

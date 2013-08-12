@@ -15,53 +15,53 @@ defined('_JEXEC') or die;
  */
 class DzfoodmenuHelper
 {
-	/**
-	 * Configure the Linkbar.
-	 */
-	public static function addSubmenu($vName = '')
-	{
-		JHtmlSidebar::addEntry(
-			JText::_('COM_DZFOODMENU_TITLE_DISHES'),
-			'index.php?option=com_dzfoodmenu&view=dishes',
-			$vName == 'dishes'
-		);
-		JHtmlSidebar::addEntry(
-			'Categories (Dishes - Category)',
-			"index.php?option=com_categories&extension=com_dzfoodmenu.dishes.catid",
-			$vName == 'categories.dishes'
-		);
-		
-if ($vName=='categories.dishes.catid') {			
-JToolBarHelper::title('DZ Food Menu: Categories (Dishes - Category)');		
-}		JHtmlSidebar::addEntry(
-			JText::_('COM_DZFOODMENU_TITLE_COMBOS'),
-			'index.php?option=com_dzfoodmenu&view=combos',
-			$vName == 'combos'
-		);
+    /**
+     * Configure the Linkbar.
+     */
+    public static function addSubmenu($vName = '')
+    {
+        JHtmlSidebar::addEntry(
+            JText::_('COM_DZFOODMENU_TITLE_DISHES'),
+            'index.php?option=com_dzfoodmenu&view=dishes',
+            $vName == 'dishes'
+        );
+        JHtmlSidebar::addEntry(
+            'Categories (Dishes - Category)',
+            "index.php?option=com_categories&extension=com_dzfoodmenu.dishes.catid",
+            $vName == 'categories.dishes'
+        );
+        
+if ($vName=='categories.dishes.catid') {            
+JToolBarHelper::title('DZ Food Menu: Categories (Dishes - Category)');      
+}       JHtmlSidebar::addEntry(
+            JText::_('COM_DZFOODMENU_TITLE_COMBOS'),
+            'index.php?option=com_dzfoodmenu&view=combos',
+            $vName == 'combos'
+        );
 
-	}
+    }
 
-	/**
-	 * Gets a list of the actions that can be performed.
-	 *
-	 * @return	JObject
-	 * @since	1.6
-	 */
-	public static function getActions()
-	{
-		$user	= JFactory::getUser();
-		$result	= new JObject;
+    /**
+     * Gets a list of the actions that can be performed.
+     *
+     * @return  JObject
+     * @since   1.6
+     */
+    public static function getActions()
+    {
+        $user   = JFactory::getUser();
+        $result = new JObject;
 
-		$assetName = 'com_dzfoodmenu';
+        $assetName = 'com_dzfoodmenu';
 
-		$actions = array(
-			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.own', 'core.edit.state', 'core.delete'
-		);
+        $actions = array(
+            'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.own', 'core.edit.state', 'core.delete'
+        );
 
-		foreach ($actions as $action) {
-			$result->set($action, $user->authorise($action, $assetName));
-		}
+        foreach ($actions as $action) {
+            $result->set($action, $user->authorise($action, $assetName));
+        }
 
-		return $result;
-	}
+        return $result;
+    }
 }

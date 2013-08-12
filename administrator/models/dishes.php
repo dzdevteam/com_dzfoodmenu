@@ -69,11 +69,11 @@ class DzfoodmenuModeldishes extends JModelList {
         $this->setState('filter.state', $published);
 
         
-		//Filtering catid
-		$this->setState('filter.catid', $app->getUserStateFromRequest($this->context.'.filter.catid', 'filter_catid', '', 'string'));
+        //Filtering catid
+        $this->setState('filter.catid', $app->getUserStateFromRequest($this->context.'.filter.catid', 'filter_catid', '', 'string'));
 
-		//Filtering featured
-		$this->setState('filter.featured', $app->getUserStateFromRequest($this->context.'.filter.featured', 'filter_featured', '', 'string'));
+        //Filtering featured
+        $this->setState('filter.featured', $app->getUserStateFromRequest($this->context.'.filter.featured', 'filter_featured', '', 'string'));
 
 
         // Load the parameters.
@@ -91,9 +91,9 @@ class DzfoodmenuModeldishes extends JModelList {
      * different modules that might need different sets of data or different
      * ordering requirements.
      *
-     * @param	string		$id	A prefix for the store id.
-     * @return	string		A store id.
-     * @since	1.6
+     * @param   string      $id A prefix for the store id.
+     * @return  string      A store id.
+     * @since   1.6
      */
     protected function getStoreId($id = '') {
         // Compile the store id.
@@ -106,8 +106,8 @@ class DzfoodmenuModeldishes extends JModelList {
     /**
      * Build an SQL query to load the list data.
      *
-     * @return	JDatabaseQuery
-     * @since	1.6
+     * @return  JDatabaseQuery
+     * @since   1.6
      */
     protected function getListQuery() {
         // Create a new query object.
@@ -127,12 +127,12 @@ class DzfoodmenuModeldishes extends JModelList {
     $query->select('uc.name AS editor');
     $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
     
-		// Join over the user field 'created_by'
-		$query->select('created_by.name AS created_by');
-		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-		// Join over the category 'catid'
-		$query->select('catid.title AS catid');
-		$query->join('LEFT', '#__categories AS catid ON catid.id = a.catid');
+        // Join over the user field 'created_by'
+        $query->select('created_by.name AS created_by');
+        $query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+        // Join over the category 'catid'
+        $query->select('catid.title AS catid');
+        $query->join('LEFT', '#__categories AS catid ON catid.id = a.catid');
 
         
     // Filter by published state
@@ -157,17 +157,17 @@ class DzfoodmenuModeldishes extends JModelList {
 
         
 
-		//Filtering catid
-		$filter_catid = $this->state->get("filter.catid");
-		if ($filter_catid) {
-			$query->where("a.catid = '".$db->escape($filter_catid)."'");
-		}
+        //Filtering catid
+        $filter_catid = $this->state->get("filter.catid");
+        if ($filter_catid) {
+            $query->where("a.catid = '".$db->escape($filter_catid)."'");
+        }
 
-		//Filtering featured
-		$filter_featured = $this->state->get("filter.featured");
-		if ($filter_featured) {
-			$query->where("a.featured = '".$db->escape($filter_featured)."'");
-		}
+        //Filtering featured
+        $filter_featured = $this->state->get("filter.featured");
+        if ($filter_featured) {
+            $query->where("a.featured = '".$db->escape($filter_featured)."'");
+        }
 
 
         // Add the list ordering clause.

@@ -65,8 +65,8 @@ class DzfoodmenuModelcombos extends JModelList {
         $this->setState('filter.state', $published);
 
         
-		//Filtering dishes
-		$this->setState('filter.dishes', $app->getUserStateFromRequest($this->context.'.filter.dishes', 'filter_dishes', '', 'string'));
+        //Filtering dishes
+        $this->setState('filter.dishes', $app->getUserStateFromRequest($this->context.'.filter.dishes', 'filter_dishes', '', 'string'));
 
 
         // Load the parameters.
@@ -84,9 +84,9 @@ class DzfoodmenuModelcombos extends JModelList {
      * different modules that might need different sets of data or different
      * ordering requirements.
      *
-     * @param	string		$id	A prefix for the store id.
-     * @return	string		A store id.
-     * @since	1.6
+     * @param   string      $id A prefix for the store id.
+     * @return  string      A store id.
+     * @since   1.6
      */
     protected function getStoreId($id = '') {
         // Compile the store id.
@@ -99,8 +99,8 @@ class DzfoodmenuModelcombos extends JModelList {
     /**
      * Build an SQL query to load the list data.
      *
-     * @return	JDatabaseQuery
-     * @since	1.6
+     * @return  JDatabaseQuery
+     * @since   1.6
      */
     protected function getListQuery() {
         // Create a new query object.
@@ -120,12 +120,12 @@ class DzfoodmenuModelcombos extends JModelList {
     $query->select('uc.name AS editor');
     $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
     
-		// Join over the user field 'created_by'
-		$query->select('created_by.name AS created_by');
-		$query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-		// Join over the foreign key 'dishes'
-		$query->select('#__dzfoodmenu_dishes_412915.title AS dishes_title_412915');
-		$query->join('LEFT', '#__dzfoodmenu_dishes AS #__dzfoodmenu_dishes_412915 ON #__dzfoodmenu_dishes_412915.id = a.dishes');
+        // Join over the user field 'created_by'
+        $query->select('created_by.name AS created_by');
+        $query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
+        // Join over the foreign key 'dishes'
+        $query->select('#__dzfoodmenu_dishes_412915.title AS dishes_title_412915');
+        $query->join('LEFT', '#__dzfoodmenu_dishes AS #__dzfoodmenu_dishes_412915 ON #__dzfoodmenu_dishes_412915.id = a.dishes');
 
         
     // Filter by published state
@@ -150,11 +150,11 @@ class DzfoodmenuModelcombos extends JModelList {
 
         
 
-		//Filtering dishes
-		$filter_dishes = $this->state->get("filter.dishes");
-		if ($filter_dishes) {
-			$query->where("a.dishes REGEXP ',?".$db->escape($filter_dishes).",?'");
-		}
+        //Filtering dishes
+        $filter_dishes = $this->state->get("filter.dishes");
+        if ($filter_dishes) {
+            $query->where("a.dishes REGEXP ',?".$db->escape($filter_dishes).",?'");
+        }
 
 
         // Add the list ordering clause.
@@ -170,30 +170,30 @@ class DzfoodmenuModelcombos extends JModelList {
     public function getItems() {
         $items = parent::getItems();
         
-		foreach ($items as $oneItem) {
+        foreach ($items as $oneItem) {
 
-			if (isset($oneItem->dishes)) {
-				$values = explode(',', $oneItem->dishes);
+            if (isset($oneItem->dishes)) {
+                $values = explode(',', $oneItem->dishes);
 
-				$textValue = array();
-				foreach ($values as $value){
-					$db = JFactory::getDbo();
-					$query = $db->getQuery(true);
-					$query
-							->select('title')
-							->from('`#__dzfoodmenu_dishes`')
-							->where('id = ' .$value);
-					$db->setQuery($query);
-					$results = $db->loadObject();
-					if ($results) {
-						$textValue[] = $results->title;
-					}
-				}
+                $textValue = array();
+                foreach ($values as $value){
+                    $db = JFactory::getDbo();
+                    $query = $db->getQuery(true);
+                    $query
+                            ->select('title')
+                            ->from('`#__dzfoodmenu_dishes`')
+                            ->where('id = ' .$value);
+                    $db->setQuery($query);
+                    $results = $db->loadObject();
+                    if ($results) {
+                        $textValue[] = $results->title;
+                    }
+                }
 
-			$oneItem->dishes = !empty($textValue) ? implode(', ', $textValue) : $oneItem->dishes;
+            $oneItem->dishes = !empty($textValue) ? implode(', ', $textValue) : $oneItem->dishes;
 
-			}
-		}
+            }
+        }
         return $items;
     }
 

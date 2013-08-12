@@ -23,13 +23,13 @@ $document->addStyleSheet('components/com_dzfoodmenu/assets/css/dzfoodmenu.css');
     js = jQuery.noConflict();
     js(document).ready(function(){
         
-	js('input:hidden.dishes').each(function(){
-		var name = js(this).attr('name');
-		if(name.indexOf('disheshidden')){
-			js('#jform_dishes option[value="'+js(this).val()+'"]').attr('selected',true);
-		}
-	});
-	js("#jform_dishes").trigger("liszt:updated");
+    js('input:hidden.dishes').each(function(){
+        var name = js(this).attr('name');
+        if(name.indexOf('disheshidden')){
+            js('#jform_dishes option[value="'+js(this).val()+'"]').attr('selected',true);
+        }
+    });
+    js("#jform_dishes").trigger("liszt:updated");
     });
     
     Joomla.submitbutton = function(task)
@@ -41,9 +41,9 @@ $document->addStyleSheet('components/com_dzfoodmenu/assets/css/dzfoodmenu.css');
             
             if (task != 'combo.cancel' && document.formvalidator.isValid(document.id('combo-form'))) {
                 
-	if(js('#jform_dishes option:selected').length == 0){
-		js("#jform_dishes option[value=0]").attr('selected','selected');
-	}
+    if(js('#jform_dishes option:selected').length == 0){
+        js("#jform_dishes option[value=0]").attr('selected','selected');
+    }
                 Joomla.submitform(task, document.getElementById('combo-form'));
             }
             else {
