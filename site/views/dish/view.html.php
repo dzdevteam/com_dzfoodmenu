@@ -34,8 +34,8 @@ class DzfoodmenuViewDish extends JViewLegacy {
         $this->item = $this->get('Data');
         $this->params = $app->getParams('com_dzfoodmenu');
    		
-		$this->item->catid_title = $this->getModel()->getCategoryName($this->item->catid)->title;
-
+		$this->item->catid_title = ($this->item->catid) ? $this->getModel()->getCategoryName($this->item->catid)->title : '';
+        
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
             throw new Exception(implode("\n", $errors));
