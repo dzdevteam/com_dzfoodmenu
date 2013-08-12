@@ -126,7 +126,9 @@ if (!empty($this->extra_sidebar)) {
                 <th class='left'>
                 <?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_COMBOS_COMBO_PRICE', 'a.combo_price', $listDirn, $listOrder); ?>
                 </th>
-                    
+                <th width="1%" class="nowrap center hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
+                </th>
                     
                 <?php if (isset($this->items[0]->id)): ?>
                     <th width="1%" class="nowrap center hidden-phone">
@@ -221,7 +223,9 @@ if (!empty($this->extra_sidebar)) {
                     <?php echo $item->combo_price; ?>
                 </td>
 
-
+                <td class="center hidden-hone">
+                    <?php echo (int) $item->ordering; ?>
+                </td>
                 <?php if (isset($this->items[0]->id)): ?>
                     <td class="center hidden-phone">
                         <?php echo (int) $item->id; ?>

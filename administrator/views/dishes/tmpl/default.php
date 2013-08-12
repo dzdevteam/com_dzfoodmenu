@@ -124,7 +124,10 @@ if (!empty($this->extra_sidebar)) {
                 </th>
                 <th class="left">
                 <?php echo JText::_('COM_DZFOODMENU_FORM_FIELDSET_DISH_SALEOFF'); ?>
-                </th>    
+                </th> 
+                <th width="1%" class="nowrap center hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
+                </th>
                 <?php if (isset($this->items[0]->id)): ?>
                     <th width="1%" class="nowrap center hidden-phone">
                         <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -222,7 +225,9 @@ if (!empty($this->extra_sidebar)) {
                     <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <?php echo $item->saleoff['large']; ?><br />
                     <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <?php echo $item->saleoff['special']; ?>
                 </td>
-
+                <td class="center hidden-hone">
+                    <?php echo (int) $item->ordering; ?>
+                </td>
                 <?php if (isset($this->items[0]->id)): ?>
                     <td class="center hidden-phone">
                         <?php echo (int) $item->id; ?>
