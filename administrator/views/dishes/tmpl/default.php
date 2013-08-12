@@ -110,7 +110,7 @@ if (!empty($this->extra_sidebar)) {
                         <?php echo JHtml::_('grid.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
                     </th>
                 <?php endif; ?>
-                <th class='left'>
+                <th class='left' width="30%">
                 <?php echo JHtml::_('grid.sort',  'COM_DZFOODMENU_DISHES_TITLE', 'a.title', $listDirn, $listOrder); ?>
                 </th>
                 <th>
