@@ -195,6 +195,10 @@ class DzfoodmenuModeldishes extends JModelList {
             $registry = new JRegistry();
             $registry->loadString($item->saleoff);
             $item->saleoff = $registry->toArray();
+            
+            $registry = new JRegistry();
+            $registry->loadString($item->alternative);
+            $item->alternative = $registry->toArray();
         }
         return $items;
     }

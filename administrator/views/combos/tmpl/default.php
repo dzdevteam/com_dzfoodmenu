@@ -199,6 +199,8 @@ if (!empty($this->extra_sidebar)) {
                 <?php else : ?>
                     <?php echo $this->escape($item->title); ?>
                 <?php endif; ?>
+                    <br />
+                    <span class="small"><?php echo JText::_('COM_DZFOODMENU_FORM_LBL_COMBO_ALT_TITLE'); ?>: <?php echo $item->alternative['title']; ?>
                 </td>
                 <td class="center">
                     <?php if (!empty($item->image)) { ?>

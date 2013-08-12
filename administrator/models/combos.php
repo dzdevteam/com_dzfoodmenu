@@ -193,6 +193,10 @@ class DzfoodmenuModelcombos extends JModelList {
             $oneItem->dishes = !empty($textValue) ? implode(', ', $textValue) : $oneItem->dishes;
 
             }
+            
+            $registry = new JRegistry();
+            $registry->loadString($oneItem->alternative);
+            $oneItem->alternative = $registry->toArray();
         }
         return $items;
     }
