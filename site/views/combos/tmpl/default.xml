@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_DZFOODMENU_TITLE_LIST_VIEW_COMBOS" option="View">
+    <layout title="COM_DZFOODMENU_TITLE_LIST_VIEW_COMBOS" option="View">
         <message>
                         <![CDATA[COM_DZFOODMENU_TITLE_LIST_VIEW_COMBOS_DESC]]>
         </message>
-	</layout>
+    </layout>
     <fields name="request">
         <fieldset name="request">
             <field name="filter_order"

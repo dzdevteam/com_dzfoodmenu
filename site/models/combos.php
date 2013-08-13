@@ -151,6 +151,9 @@ class DzfoodmenuModelCombos extends JModelList {
         
         foreach ($items as &$item) {
             $item->link = JRoute::_(DZFoodMenuHelperRoute::getComboRoute($item->id));
+            
+            $registry = new JRegistry($item->alternative);
+            $item->alternative = $registry->toArray();
         }
         
         return $items;

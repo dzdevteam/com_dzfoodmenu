@@ -100,6 +100,10 @@ class DzfoodmenuModelDishes extends JModelList {
             $this->setState('filter.catid', $filter_catid);
         }
 
+        $filter_subcat = $app->input->getInt('filter_subcat', 0);
+        if ($filter_subcat) {
+            $this->setState('filter.subcat', $filter_subcat);
+        }
         // List state information.
         parent::populateState($ordering, $direction);
     }
@@ -155,9 +159,20 @@ class DzfoodmenuModelDishes extends JModelList {
         }
 
         //Filtering catid
-        $filter_catid = $this->state->get("filter.catid");
+        $filter_subcat = $this->state->get("filter.subcat", 0);
+        $filter_catid = $this->state->get("filter.catid", 0);
         if ($filter_catid) {
-            $query->where("a.catid = '".$filter_catid."'");
+            if ($filter_subcat) {
+                $query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+                $cat_tbl = JTable::getInstance('Category', 'JTable');
+                $cat_tbl->load($filter_catid);
+                $rgt = $cat_tbl->rgt;
+                $lft = $cat_tbl->lft;
+                $query->where('c.lft >= ' . (int) $lft)
+                    ->where('c.rgt <= ' . (int) $rgt);
+            } else {
+                $query->where("a.catid = '".$filter_catid."'");
+            }
         }
 
         //Filtering featured
@@ -180,6 +195,15 @@ class DzfoodmenuModelDishes extends JModelList {
         
         foreach ($items as &$item) {
             $item->link = JRoute::_(DZFoodMenuHelperRoute::getDishRoute($item->id));
+            
+            $registry = new JRegistry($item->alternative);
+            $item->alternative = $registry->toArray();
+            
+            $registry = new JRegistry($item->prices);
+            $item->prices = $registry->toArray();
+            
+            $registry = new JRegistry($item->saleoff);
+            $item->saleoff = $registry->toArray();
         }
         
         return $items;

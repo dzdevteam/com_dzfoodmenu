@@ -131,8 +131,8 @@ class DzfoodmenuModeldishes extends JModelList {
         $query->select('created_by.name AS created_by');
         $query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
         // Join over the category 'catid'
-        $query->select('catid.title AS catid');
-        $query->join('LEFT', '#__categories AS catid ON catid.id = a.catid');
+        $query->select('c.title AS catid');
+        $query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
         
     // Filter by published state
@@ -155,12 +155,22 @@ class DzfoodmenuModeldishes extends JModelList {
             }
         }
 
-        
-
-        //Filtering catid
-        $filter_catid = $this->state->get("filter.catid");
-        if ($filter_catid) {
-            $query->where("a.catid = '".$db->escape($filter_catid)."'");
+        // Filter by a single or group of categories.
+        $categoryId = $this->getState('filter.catid');
+        if (is_numeric($categoryId))
+        {
+            $cat_tbl = JTable::getInstance('Category', 'JTable');
+            $cat_tbl->load($categoryId);
+            $rgt = $cat_tbl->rgt;
+            $lft = $cat_tbl->lft;
+            $query->where('c.lft >= ' . (int) $lft)
+                ->where('c.rgt <= ' . (int) $rgt);
+        }
+        elseif (is_array($categoryId))
+        {
+            JArrayHelper::toInteger($categoryId);
+            $categoryId = implode(',', $categoryId);
+            $query->where('a.catid IN (' . $categoryId . ')');
         }
 
         //Filtering featured

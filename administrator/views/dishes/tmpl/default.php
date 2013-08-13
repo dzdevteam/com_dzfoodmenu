@@ -216,16 +216,16 @@ if (!empty($this->extra_sidebar)) {
                     <?php echo $item->catid; ?>
                 </td>
                 <td>
-                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>: <?php echo $item->prices['medium']; ?><br />
-                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <?php echo $item->prices['large']; ?><br />
-                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <?php echo $item->prices['special']; ?>
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>: <b><?php echo $item->prices['medium']; ?></b><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <b><?php echo $item->prices['large']; ?></b><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <b><?php echo $item->prices['special']; ?></b>
                 </td>
                 <td>
-                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>: <?php echo $item->saleoff['medium']; ?><br />
-                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <?php echo $item->saleoff['large']; ?><br />
-                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <?php echo $item->saleoff['special']; ?>
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_MEDIUM'); ?>: <b><?php echo $item->saleoff['medium']; ?></b><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_LARGE'); ?>: <b><?php echo $item->saleoff['large']; ?></b><br />
+                    <?php echo JText::_('COM_DZFOODMENU_FORM_LBL_DISH_PRICES_SPECIAL'); ?>: <b><?php echo $item->saleoff['special']; ?></b>
                 </td>
-                <td class="center hidden-hone">
+                <td class="center hidden-phone">
                     <?php echo (int) $item->ordering; ?>
                 </td>
                 <?php if (isset($this->items[0]->id)): ?>

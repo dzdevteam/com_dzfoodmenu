@@ -47,6 +47,20 @@ abstract class DZFoodMenuHelperRoute
         return $link;
     }
 
+    /**
+     * @param   integer  The route of the content item
+     */
+    public static function getCategoryRoute($id, $catid = 0, $language = 0)
+    {
+        //Create the link
+        $link = 'index.php?option=com_dzfoodmenu&view=category&id='. $id;
+
+        if ($itemId = self::_findItemid(array('categories', 'category')))
+            $link .= '&Itemid='.$itemId;
+        
+        return $link;
+    }
+     
 
     protected  static function _findItemid($needle)
     {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fieldset>
+    <fieldset>
 
         <field name="id" type="text" default="0" label="COM_DZFOODMENU_FORM_LBL_DISH_ID"
             readonly="true" class="readonly"
@@ -120,11 +120,11 @@
         </field> 
 
  
-		<field name="filter_featured" type="list" onchange="this.form.submit();">
-			<option value="">COM_DZFOODMENU_DISHES_FEATURED_FILTER</option>
-			<option value="0">JNO</option>
-			<option value="1">JYES</option>
-		</field> 
+        <field name="filter_featured" type="list" onchange="this.form.submit();">
+            <option value="">COM_DZFOODMENU_DISHES_FEATURED_FILTER</option>
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field> 
 
         <fields name="alternative">
             <fieldset name="alternative">
@@ -219,6 +219,6 @@
             section="dish"
         />
 
-	</fieldset>
+    </fieldset>
 
 </form>
